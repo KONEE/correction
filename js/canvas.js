@@ -82,6 +82,10 @@ var canvas = {
             // Dessin désactivé
             canvas = false;
         };
+        // la sortie du cadre dessin désactivé
+        dessinElt.onmouseleave = function(e){
+            canvas = false;
+        };
 
         // Ajoute un tracé
         function dessiner(x, y) {
