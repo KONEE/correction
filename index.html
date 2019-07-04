@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0">
+        <title>Service de location de vélos</title>
+        <link rel="icon" type="image/png" href="images/favicon.ico" />
+        <!--Feuille de style générale et responsive-->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!--Feuille de style awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--google font -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <!-- leaflet-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
+        <!-- Affichage des fantawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous" />
+
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+
+    </head>
+
+    <body>
+        <!--************************************************header****************************************-->
+
+        <header>
+            <div id="logoh1">
+                <a href="index.html">
+                    <img src="images/logo-bike-nantes.png" id="logo" alt="Logo bikeNantes" />
+                </a>
+                <h1 id="titre_header">Réservation de vélos Nantes</h1>
+            </div>
+
+            <div id="hamburger">
+                <div id="hamburger-content">
+                    <nav>
+                        <ul>
+                            <li><a href="#price">Tarifs</a></li>
+                            <li><a href="#carte">Réserver</a></li>
+                            <li><a href="#footerr">À propos</a></li>
+                        </ul>
+                    </nav>
+                    <a href="#" class="button button-sign-up">S'inscrire</a>
+                    <a href="#" class="button button-sign-in">Se connecter</a>
+                </div>
+                <button id="hamburger-button">&#9776;</button>
+                <div id="hamburger-sidebar">
+                    <div id="hamburger-sidebar-header"></div>
+                    <div id="hamburger-sidebar-body"></div>
+                </div>
+                <div id="hamburger-overlay"></div>
+            </div>
+        </header>
+        <!--************************************************Section slider****************************************-->
+        <section id="slider">
+
+            <!-- conteneur slider -->
+            <div class="slideshow-container">
+
+                <!-- Full-width images with number and caption text -->
+
+                <div class="mySlides fade slidee">
+
+                    <img src="images/appli1-bike-nantes.jpg" alt="image ville de nantes bikenantes">
+                    <!-- <div class="text">text Caption </div> -->
+                </div>
+
+
+                <div class="mySlides fade slidee">
+
+                    <img src="images/appli2-bike-nantes.jpg" alt="image ville de nantes bikenantes">
+                    <!--  <div class="text">Caption 2</div> -->
+                </div>
+
+                <div class="mySlides fade slidee">
+
+                    <img src="images/appli3-bike-nantes.jpg" alt="image ville de nantes bikenantes">
+                    <!-- <div class="text">Caption 3</div> -->
+                </div>
+
+                <!-- buttons nexxt et prec -->
+                <a class="prev" onclick="slid.plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="slid.plusSlides(1)">&#10095;</a>
+            </div>
+            <!-- The dots/circles -->
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+
+        </section>
+        <!--************************************************tarifs****************************************-->
+        <section id="price">
+            <div></div>
+
+            <h1 id="h1Tarif">Nos tarifs de location de vélos </h1>
+            <div id="tarif">
+
+                <div class="accordeon">
+                    <h3>Location de vélo Station</h3>
+                    <div class="prix">
+                        <div class="prix-location">
+                            <p>1/2 journée<span class="price-big">8€ *</span></p>
+                            <p>Journée (8h) <span class="price-big">13€ *</span></p>
+                            <p>Journée (24h) <span class="price-big">20€</span></p>
+                            <p>Jour sup <span class="price-big">5€</span></p>
+                            <p><span class="aster">* + 1€ week-end</span></p>
+                        </div>
+                        <div class="prix-accessoires">
+                            <h3>Accessoires</h3>
+                            <ul>
+                                <li>Sur demande : casque, panier 1€ par jour / article</li>
+                                <li>Siège enfant 3€ par jour / 2€ jour Sup</li>
+                            </ul>
+                        </div>
+                        <div id="promo-week">
+                            <h4>Offre spéciale Week-end</h4>
+                            <p class="price-week">15€</p>
+                            <p>Accessoires offerts<br>
+                                (siège enfant non inclus)</p>
+                        </div>
+                        <div class="reserver">
+                            <a class="simple-button" href="">Réservez un vélo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordeon">
+                    <h3>Location vélo électrique </h3>
+                    <div class="prix">
+                        <div id="coul" class="prix-location">
+                            <p>Tarif ½ journée :<span class="price-big">13€</span></p>
+                            <p>Journée 8h :<span class="price-big">20€</span></p>
+                            <p>Journée (24h) :<span class="price-big">30€</span></p>
+                            <p>Journée suppl. :<span class="price-big">15€</span></p>
+                            <p class="offer">Casque, panier offerts</p>
+                        </div>
+                        <div class="commentaire">
+                            <p>Nos vélos électriques vous permettront de découvrir Nantes et sa région sans effort. Avec une autonomie de 90km, vous pourrez explorer Nantes et ses environs, Réze, saint sebastian….en toute tranquillité.
+                            </p>
+                        </div>
+                        <div class="reserver">
+                            <a class="simple-button" href="">Réservez un vélo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordeon">
+                    <h3>Location de vélo à domicile</h3>
+                    <div class="prix">
+                        <div class="prix-location">
+                            <p>1 jour (min. 2 vélos)<span class="price-big">15€ /vélo</span>+15€/jour suppl.</p>
+                            <p>Vélo électrique :<span class="price-big">30€ /vélo</span>+15€/jour suppl.</p>
+                            <p>Livraison&nbsp;: 50€ (à partir de 9h)<br>
+                                Enlèvement&nbsp;: 50€ (jusqu’à 21h)<br>
+                                Casque et panier offerts</p>
+                        </div>
+                        <div class="commentaire">
+                            <p>Sur simple appel téléphonique au 01 00 00 00, ou en remplissant le formulaire de réservation, vous obtenez un vélo livré le matin, chez vous ou à votre hôtel.</p>
+                            <p>La remise du vélo a lieu au même endroit, le soir.</p>
+                            <p>Réservation obligatoire, au minimum 24H à l’avance.</p>
+                        </div>
+                        <div class="reserver">
+                            <a class="simple-button" href="">Réservez un vélo</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="description">
+                    <p class="typing">
+
+                        Louer un vélo à Nantes autrement ...
+                        Nantes Bike vous propose plusieurs manières pour location d’un vélo à Nantes.
+                        Nous mettons à disposition tout ce dont vous avez besoin pour faire vos propres balades à vélo dans Nantes.
+                        Nos vélos sont légers, récents et confortables. Les équipements de conforts et de sécurité sont également proposés sur demande : casques, panier, poncho sièges-enfant, plan des pistes cyclables à Nantes.
+                        Avec bientôt 200 km de pistes cyclables, Nantes est devenue « une ville à vélo ».
+                        Nous disposons également de vélos électriques à notre agence situé à Nantes centre.
+
+                    </p>
+                    <div class="hiders">
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        <!--************************************************MapLeaflet****************************************-->
+        <section id="carte">
+            <h1 id="h1Map">Carte de réservation des vélos</h1>
+            <div class="guideAppli">
+                <span class="bouton" id="bouton_texte" onclick="guid.guideAppli()">Comment réserver</span>
+                <div id="texte" class="texte">
+                    <div class='diapo_auto_rwd'>
+                        <input name="diapo" id='slide1' type="radio" class='slide_diapo'>
+                        <input name="diapo" id='slide2' type="radio" class='slide_diapo'>
+                        <input name="diapo" id='slide3' type="radio" class='slide_diapo'>
+                        <input name="diapo" id='lance-diapo' type="radio" checked>
+                        <input name="diapo" id='pause1' type="radio" class='pause_diapo'>
+                        <input name="diapo" id='pause2' type="radio" class='pause_diapo'>
+                        <input name="diapo" id='pause3' type="radio" class='pause_diapo'>
+                        <ul>
+                            <li><img src="images/appli1-bike-nantes.jpg" alt></li>
+                            <li class='image1 slide_diapo'><img src='images/appli1-bike-nantes.jpg' alt="image guide de l'application bikenantes"></li>
+                            <li class='image2 slide_diapo'><img src='images/appli2-bike-nantes.jpg' alt="image guide de l'application bikenantes"></li>
+                            <li class='image3 slide_diapo'><img src='images/appli3-bike-nantes.jpg' alt="image guide de l'application bikenantes"></li>
+                        </ul>
+                        <div class='lancement_arret'>
+                            <label class='lance_diapo' for='lance-diapo'></label>
+                            <label class='pause_diapo image1' for='pause1'></label>
+                            <label class='pause_diapo image2' for='pause2'></label>
+                            <label class='pause_diapo image3' for='pause3'></label>
+                        </div>
+                        <div class='precedent'>
+                            <label class='image1' for='slide1'></label>
+                            <label class='image2' for='slide2'></label>
+                            <label class='image3' for='slide3'></label>
+                        </div>
+                        <div class='suivant'>
+                            <label class='image1' for='slide1'></label>
+                            <label class='image2' for='slide2'></label>
+                            <label class='image3' for='slide3'></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="map">
+                <div id="googleMap"></div>
+                <aside id="stationDetails"></aside>
+            </div>
+        </section>
+        <!--Réservation de vélos -->
+        <section id="reservation">
+            <div id="reservationVelo"></div>
+        </section>
+
+        <!--Confirmation de la réservation -->
+        <section>
+            <div id="validation"></div>
+        </section>
+        <!--************************************************footer****************************************-->
+
+        <footer>
+            <div id="footer1">
+                <div id="adress" class="wrap-footer1">
+                    <h2>Bike Nantes </h2>
+                    <p>
+                        <i class="fas fa-map-marker-alt"> :10 rue samuel de champlain <br>
+                            44300 Nantes </i> <br><br>
+                        <i class="fas fa-phone-volume">: 00 00 00 00 00</i> <br><br>
+                        <!--
+                        <i class="fas fa-at">: bike.reservation.com</i> -->
+                        <i class="far fa-envelope"> : bikenantes@reservation.com </i>
+
+
+                    </p>
+                    <br>
+                    <br>
+                    <form action="/action_page.php">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div id="video" class="wrap-footer1">
+                    <h2>Une video pour la bonne pratique</h2>
+                    <video controls="controls" autoplay  muted  loop>
+                    <source src="images/Nouveau-à-Nantes-le-vélo-canyoning-urbain.mp4" type="video/mp4" />
+                    <source src=".webm" type="video/webm" />
+                    <source src=".ogv" type="video/ogg" />
+                    Vous n'avez pas de navigateur moderne, donc pas de balise video HTML5 !
+                    </video>
+
+                </div>
+                <div id="reseau-sociaux" class="wrap-footer1">
+                    <h2>Bike Nantes sur :</h2>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-whatsapp"></i> <br>
+                    <h3>Nous contacter </h3>
+                    <form id="formulairee">
+                        <input type="text" placeholder="Nom">
+                        <textarea  placeholder="votre Message"></textarea>
+                        <p><a href="#" class="send" title="Envoyer">Envoyer</a></p>
+                    </form>
+                </div>
+
+            </div>
+            <div id="footerr" class="text_footer"> Service de locations de vélos Nantes<br />Copyright KONE</div>
+        </footer>
+        <!--************************************************js****************************************-->
+        <script src="https://code.jquery.com/jquery-3.4.0.slim.min.js" integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI=" crossorigin="anonymous">
+        </script>
+
+        <script src="js/Diapo.js"></script>
+        <script src="js/GuideAppli.js"></script>
+        <script src="js/menuBurger.js"></script>
+        <script src="js/ajax.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/ajax.js"></script>
+        <script src="js/aside.js"></script>
+        <script src="js/canvas.js"></script>
+        <script src="js/Compteur.js"></script>
+        <script src="js/App.js"></script>
+
+
+
+    </body>
+
+</html>
