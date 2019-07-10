@@ -145,10 +145,7 @@ var canvas = {
             x: e.touches[0].clientX - rect.left,
             y: e.touches[0].clientY - rect.top
         };
-        /*if(document.getElementById('idUser').value ===" " && document.getElementById('prenomUser').value === ""){
-        // Activation du bouton de confirmation
-        document.getElementById("confirmation").disabled = true;
-        }else{ document.getElementById("confirmation").disabled = false;  }*/
+        
 
     },
 
@@ -167,17 +164,17 @@ var canvas = {
         inputNom.setAttribute("type", "text");
         inputNom.setAttribute("placeholder", "Nom *");
         inputNom.setAttribute("required", "true");
+        inputNom.value = localStorage.getItem("user");
         document.getElementById("client").appendChild(inputNom);
         var inputPrenom = document.createElement("INPUT");
         inputPrenom.setAttribute("id", "prenomUser");
         inputPrenom.setAttribute("type", "text");
         inputPrenom.setAttribute("placeholder", "Prenom *");
         inputPrenom.setAttribute("required", " true");
+        inputPrenom.value= localStorage.getItem("prenom");
         document.getElementById("client").appendChild(inputPrenom);
-        //sauvegarder en local nom et prenom
-          /* localStorage.setItem('nom',document.getElementById('idUser').value);
-            localStorage.setItem('prenom',document.getElementById('prenomUser').value);*/
 
+        
 
     },
 
@@ -190,9 +187,7 @@ var canvas = {
         confirmElt.disabled = true;
 
 
-   /* disabledElt : function() {
-
-    } ;  */ 
+  
 
         // Désactivation du bouton confirmer  si click sur  le bouton "clear"
         document.getElementById("clear").addEventListener("click", function() {
@@ -202,16 +197,12 @@ var canvas = {
         // Ajout d'un écouteur d'évènement sur le bouton de confirmation (lancement du décompte)
         confirmElt.addEventListener("click", function() {
             let user = document.getElementById("idUser").value;
-            //sauvegarder en local nom et prenom
-           /* localStorage.setItem('nom',document.getElementById('idUser').value);
-            localStorage.setItem('prenom',document.getElementById('prenomUser').value);
-            console.log(localStorage.getItem("nom"));
-            document.getElementById("prenomUser").textContent= localStorage.getItem('prenom');
-            //localStorage.getItem("prenom");*/
+            let prenom = document.getElementById("prenomUser").value;
             
                         // Remplacement d'un précédent canvas éventuel
-            if(document.getElementById('idUser').value == "" && document.getElementById('prenomUser').value == ""){
+            if(document.getElementById('idUser').value == "" || document.getElementById('prenomUser').value == ""){
            alert("veillez renseigner le champs Nom et Prenom");
+
             
         } else{
                 
@@ -232,7 +223,12 @@ var canvas = {
         
              // Demarrage du décompte de 20 min. après confirmation
             sessionStorage.clear();
-            compte.decompte(station, user); }
+            //clearInterval(interval);
+            compte.decompte(station, user,prenom); 
+            compte.save(station,user,prenom);
+            // Création du bouton "Effacer"
+       
+        }
 
         });
 

@@ -9,6 +9,7 @@ guid.guideAppli();
 leaflet.initMap();
 // Chargement de compteur
 let compte = new Compt();
+compte.display();
 //compte.decompte(station);
 //console.log(sessionStorage);
 // Chargement Burger

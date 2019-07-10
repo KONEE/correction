@@ -3,32 +3,30 @@ class Compt {
 
     constructor() {
         this.timerElt = document.getElementById("validation");
-        this.duration = 1200;
-        this.display();
+        // masquer annulation
+        var annuler = document.getElementById("annuler")
+        annuler.style.visibility = "hidden";
+
+        if(localStorage.getItem("timeStamp")){
+          let diffTime = Math.floor((Date.now() - localStorage.getItem("timeStamp"))/1000);
+          this.duration = 1200 - diffTime ;
+          //console.log(interval);
+        }else{
+          this.duration = 1200;
+        }
+          
+        
 
     }
-
+   
     // Enregistrement des données si actualisation de la page du navigateur
     display() {
-
-        if (localStorage.length > 0) {
            
-            setInterval(function(){
-                let valLocalStor = localStorage.getItem("durationActu");
-                let date = Date.now();
-                console.log(valLocalStor);
-                console.log(date);
-                let dateActua = Math.floor((date - valLocalStor)/1000);
-               // this.convert(dateActua); dateActua me derange pour appeler convert ici
-                console.log(dateActua); 
-              
-                document.getElementById("validation").textContent = localStorage.getItem("name") + "pour" + dateActua ;
-                this.save(name,user,dateActua);
-               
-            // }, 1000)
-            } , 1000)
-
-
+        if (localStorage.length > 0) {
+          //clearInterval();
+            this.decompte(localStorage.getItem("name"),localStorage.getItem("user"),localStorage.getItem("prenom"));
+            console.log(localStorage.getItem("name"));
+ 
         } else {
             this.timerElt.textContent = "Pas de réservation en cours...";
         }
@@ -37,31 +35,38 @@ class Compt {
    
     // Décompte de 20 minutes lorsqu'il y a une réservation validée
 
-    decompte(station, user,date=0) {
-        clearInterval(this.interval);
-       
-       
-        
-        
-        this.interval = setInterval(function() {
+    decompte(station, user,prenom) {
+      // annulation visible
+        var annuler = document.getElementById("annuler")
+        annuler.style.visibility = "visible";
+
+       // clearInterval(interval);
+        var interval = setInterval(function() {
             let tps = this.convert(this.duration);
-            //console.log(this);
-            this.timerElt.textContent = "Merci de votre confiance Mr  " + " " + user + "!! " + "Votre reservation est à la station: " + station.name + " pour une durée de " + tps[0] + " min " + tps[1] + " s.";
+            
+            this.timerElt.textContent = /*"Mr/Mme  " + " " + user + "!! " + */"Vous avez une reservation à la station: " + localStorage.getItem("name") + " pour une durée de " + tps[0] + " min " + tps[1] + " s.";
             this.duration--;
-            this.save(station.name,user,this.duration);
-            //console.log(this.duration);
+            
 
             // Décompte terminé,arret
             if (this.duration < 0) {
 
                 // Effacement des données éventuelles dans sessionStorage
                 localStorage.clear();
-                // Réinitialisation de l'affichage de la page
-                this.display();
+                this.timerElt.textContent = "Pas de réservation en cours...";
             }
         }.bind(this), 1000)
-    }
 
+       // reset
+        document.getElementById("annuler").addEventListener("click", function() {
+            clearInterval(interval);
+            localStorage.clear();
+            this.duration=1200;
+            this.display();
+
+        }) 
+    }
+    
     // Conversion des secondes en minutes et secondes
     convert(duration) {
         // Création d'un tableau afin de stocker les données
@@ -76,18 +81,17 @@ class Compt {
        
         return tps;
     }
-    //methode client a creer
+    
     // Enregistrement des données si actualisation de la page du navigateur
-    save(name,user, duration) {
-       // let date = Date.now();
-            localStorage.setItem("user", user);
-            localStorage.setItem("name", name);
-           // localStorage.setItem("prenom", prenom);
-           // localStorage.setItem("date", date);
-            localStorage.setItem("durationActu", duration);
-           
+    save(station,user,prenom) {
        
+            localStorage.setItem("user", user);
+            localStorage.setItem("name", station.name);
+            localStorage.setItem("prenom", prenom);
+           localStorage.setItem("timeStamp",Date.now());
+          // console.log(localStorage.getItem("name"));
     }
+        
 
     
 }
