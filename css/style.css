@@ -606,9 +606,15 @@
       margin: 10px 23px;
       -webkit-box-shadow: 1px 1px 1px 0 #632a50;
       box-shadow: 2px 2px 2px 0 #632a50;
+      border-radius: 10%;
   }
-
-
+#annuler{
+  color: white;
+  background-color: red;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 2px 2px 2px 2px red;
+}
 
   /* ----------------------------------------------------------------
                     slider comment ça marche Application
